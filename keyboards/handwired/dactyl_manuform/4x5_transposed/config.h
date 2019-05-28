@@ -29,8 +29,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* key matrix size */
 // Columns are doubled-up
-#define MATRIX_ROWS 5
-#define MATRIX_COLS 10
+#define MATRIX_ROWS 10
+#define MATRIX_COLS 5
 
 // wiring of each half
 #define MATRIX_COL_PINS { F7, B1, B3, B2, B6 }
