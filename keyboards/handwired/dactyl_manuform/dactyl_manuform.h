@@ -2,6 +2,8 @@
 
 #ifdef KEYBOARD_handwired_dactyl_manuform_4x5
     #include "4x5.h"
+#elif KEYBOARD_handwired_dactyl_manuform_4x5_transposed
+    #include "4x5_transposed.h"
 #elif KEYBOARD_handwired_dactyl_manuform_4x6
     #include "4x6.h"
 #elif KEYBOARD_handwired_dactyl_manuform_5x6
