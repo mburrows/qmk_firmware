@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // |   G1   |   G2   |   G3   |   H1   |   H4   |        |   0    |   1    |   2    |   3    |
 // '-----------------------------------------------------------------------------------------'
 
-KEYMAP(
+LAYOUT_ortho_3x10(
     TD(TD_GUI_7), TD(TD_GUI_8), TD(TD_GUI_9), HYP_3, HYP_6, _______, TD(TD_BSPC_TAB), KC_7, KC_8, KC_9,
     TD(TD_GUI_4), TD(TD_GUI_5), TD(TD_GUI_6), HYP_2, HYP_5, _______, KC_DOT,          KC_4, KC_5, KC_6,
     TD(TD_GUI_1), TD(TD_GUI_2), TD(TD_GUI_3), HYP_1, HYP_4, _______, KC_0,            KC_1, KC_2, KC_3)
