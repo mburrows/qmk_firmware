@@ -37,6 +37,8 @@ extern keymap_config_t keymap_config;
 #define KC_C_HME CTL_T(KC_HOME)
 #define KC_A_END ALT_T(KC_END)
 #define KC_MUX   LCTL(KC_SPACE)
+#define KC_C_ALT OSM(MOD_LCTL | MOD_LALT)
+#define KC_HYP   OSM(MOD_HYPR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -48,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|------+------+------+------+------|                             |------|------+------+------+------|
          Z,     X,     C,     V,     B,                                   K,     M,  COMM,   DOT,  SLSH,\
  //|------+------+------+-------------,                             ,-------------+------+------+------,
-             LCBR,  RCBR,                                                             MUX,  LEAD,\
+            C_ALT,   HYP,                                                             MUX,  LEAD,\
         //'------+------'-------------'                             '-------------'------+------'
                           S_ESC, G_BSP,                               C_SPC, S_ENT,\
                       //'------+------'                             '------+------'
