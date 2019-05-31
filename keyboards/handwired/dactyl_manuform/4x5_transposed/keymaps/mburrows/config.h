@@ -30,3 +30,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_LEFT
 // #define MASTER_RIGHT
 #define EE_HANDS
+
+// Get taps and holds working properly
+#undef  ONESHOT_TAP_TOGGLE
+#define ONESHOT_TAP_TOGGLE 2
+
+#undef  ONESHOT_TIMEOUT
+#define ONESHOT_TIMEOUT 1000
+
+#undef  TAPPING_TOGGLE
+#define TAPPING_TOGGLE 2
+
+#undef  TAPPING_TERM
+#define TAPPING_TERM 300
+#define PERMISSIVE_HOLD
+
+#define LEADER_TIMEOUT 1000
