@@ -34,6 +34,10 @@ extern keymap_config_t keymap_config;
 #define KC_C_ALT OSM(MOD_LCTL | MOD_LALT)
 #define KC_HYP   OSM(MOD_HYPR)
 #define KC_RST   RESET
+#define KC_C_LFT C(KC_LEFT)
+#define KC_C_DN  C(KC_DOWN)
+#define KC_C_UP  C(KC_UP)
+#define KC_C_RGT C(KC_RIGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -96,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_NAV] = LAYOUT_kc( \
  //,----------------------------------,                             ,----------------------------------,
-     XXXXX,  WBAK,  MS_U,  WFWD,  WH_U,                                MPRV,  VOLD,  VOLU,  MNXT,  MPLY,\
+       RST,  WBAK,  MS_U,  WFWD,  WH_U,                               C_LFT,  C_DN,  C_UP, C_RGT, XXXXX,\
  //|------+------+------+------+------|                             |------+------+------+------+------|
      XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                                LEFT,  DOWN,    UP,  RGHT, XXXXX,\
  //|------+------+------+------+------|                             |------+------+------+------+------|
@@ -104,12 +108,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|------+------+------+------+------,                             ,------+------+------+------+------,
             _____, _____,                                                            BRID,  BRIU,\
         //'------+------'-------------'                             '-------------'------+------'
-                           BTN2,  BTN1,                               _____, _____,\
+                           BTN2,  BTN1,                                MPLY,  MNXT,\
                       //'------+------'                             '------+------'
                                     //'------+------' '------+------'
-                                         BTN3, _____,   _____, _____,\
+                                         BTN3, _____,    VOLU,  MPRV,\
                                     //'------+------' '------+------'
-                                        _____, _____,     RST, _____ \
+                                        _____, _____,    VOLD, _____ \
                                     //'------+------' '------+------'
 )
 };

@@ -27,14 +27,18 @@ enum macro_keycodes {
 #define KC_RAISE LT(_RAISE, KC_RBRC)
 #define KC_RST   RESET
 #define KC_H_TAB HYPR_T(KC_TAB)
-#define KC_C_ESC CTL_T(KC_ESC)
-#define KC_C_ENT CTL_T(KC_ENT)
 #define KC_G_BSP LGUI_T(KC_BSPC)
 #define KC_CA_BS LCA_T(KC_BSPC)
 #define KC_NAV_A LT(_NAV,KC_A)
 #define KC_NAV_O LT(_NAV,KC_O)
 #define KC_L_ESC LT(_LOWER,KC_ESC)
 #define KC_R_ENT LT(_RAISE,KC_ENT)
+#define KC_C_ESC CTL_T(KC_ESC)
+#define KC_C_ENT CTL_T(KC_ENT)
+#define KC_C_LFT C(KC_LEFT)
+#define KC_C_DN  C(KC_DOWN)
+#define KC_C_UP  C(KC_UP)
+#define KC_C_RGT C(KC_RIGHT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_kc( \
@@ -75,13 +79,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        RST, XXXXX,  WBAK,  MS_U,  WFWD,  WH_U,                   MPRV,  VOLD,  VOLU,  MNXT,  MPLY,  BRIU,\
+        RST, XXXXX,  WBAK,  MS_U,  WFWD,  WH_U,                  C_LFT,  C_DN,  C_UP, C_RGT, XXXXX,  VOLU,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX, XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                   LEFT,  DOWN,    UP,  RGHT, XXXXX,  BRID,\
+      XXXXX, XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                   LEFT,  DOWN,    UP,  RGHT, XXXXX,  VOLD,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   HOME,  PGDN,  PGUP,   END, XXXXX, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                   BTN3,  BTN2,  BTN1,    _____, _____, _____ \
+                                   BTN3,  BTN2,  BTN1,     MPLY,  MPRV,  MNXT \
                               //`--------------------'  `--------------------'
   )
 };
@@ -117,9 +121,9 @@ char matrix_line_str[24];
 
 const char *read_layer_state(void) {
   uint8_t layer = biton32(layer_state);
-  
+
   strcpy(matrix_line_str, "Layer: ");
-  
+
   switch (layer)
   {
     case _COLEMAK:
