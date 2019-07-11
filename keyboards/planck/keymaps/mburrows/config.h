@@ -15,6 +15,7 @@
 // Modifier taps
 #define CTL_ESC MT(MOD_LCTL,KC_ESC)
 #define CTL_ENT MT(MOD_LCTL,KC_ENT)
+#define HYP_TAB HYPR_T(KC_TAB)
 
 // Layer taps
 #define NAV_A    LT(_NAV,KC_A)

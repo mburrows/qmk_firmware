@@ -29,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = {
-  {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
+  {HYP_TAB, KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
   {CTL_ESC, NAV_A,   KC_R,    KC_S,    KC_T,     KC_D,     KC_H,    KC_N,    KC_E,    KC_I,    NAV_O,   CTL_ENT  },
   {KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,     KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC  },
   {KC_LEAD, OSM_CTL, OSM_ALT, OSM_GUI, LWR_BSPC, KC_BSPC,  KC_SPC,  RSE_SPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  }
@@ -110,7 +110,7 @@ void matrix_scan_user(void) {
     leader_end();
 
     // Single key macros
-    SEQ_ONE_KEY(KC_2) {
+    SEQ_ONE_KEY(KC_W) {
       SEND_STRING (" 2>&1");
     }
     SEQ_ONE_KEY(KC_F) {
