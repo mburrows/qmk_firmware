@@ -8,6 +8,10 @@
   #include "ssd1306.h"
 #endif
 
+// Add headers for raw hid communication
+#include <split_scomm.h>
+#include "raw_hid.h"
+
 extern keymap_config_t keymap_config;
 extern uint8_t is_master;
 
@@ -18,7 +22,8 @@ extern uint8_t is_master;
 #define _NAV 3
 
 enum macro_keycodes {
-  KC_SAMPLEMACRO,
+  KC_SCRN = SAFE_RANGE,
+  KC_SCRP,
 };
 
 #define KC______ KC_TRNS
@@ -55,25 +60,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LOWER] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-      XXXXX,     1,     2,     3,     4,     5,                      6,     7,     8,     9,     0,  ASTR,\
+      XXXXX,     1,     2,     3,     4,     5,                      6,     7,     8,     9,     0,   EQL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-        F11,    F1,    F2,    F3,    F4,    F5,                    DOT,     4,     5,     6,  MINS,   EQL,\
+        F11,    F1,    F2,    F3,    F4,    F5,                    DOT,     4,     5,     6,  ASTR,  PLUS,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-        F12,    F6,    F7,    F8,    F9,   F10,                      0,     1,     2,     3,  SLSH,  PLUS,\
+        F12,    F6,    F7,    F8,    F9,   F10,                      0,     1,     2,     3,  SLSH,  MINS,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  _____, _____, _____,    _____, _____, _____ \
+                                   LALT, LOWER, G_BSP,        0,   DOT,   EQL \
                               //`--------------------'  `--------------------'
   ),
 
   [_RAISE] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-        GRV,  EXLM,    AT,  LCBR,  RCBR,  PIPE,                  XXXXX, XXXXX,  ASTR, XXXXX, XXXXX, XXXXX,\
+        GRV,  EXLM,    AT,  LCBR,  RCBR,  PIPE,                    GRV, XXXXX,  ASTR, XXXXX, XXXXX, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        BSLS,  HASH,   DLR,  LPRN,  RPRN,  AMPR,                    INS,  MINS,   EQL,  DQUO,  QUOT, XXXXX,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX,  PERC,  CIRC,  LBRC,  RBRC,  TILD,                   CAPS,  UNDS,  PLUS, XXXXX, XXXXX, XXXXX,\
+      XXXXX,  PERC,  CIRC,  LBRC,  RBRC,  TILD,                   CAPS,  UNDS,  PLUS, XXXXX,  BSLS, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  _____, _____,   DEL,    _____, _____, _____ \
+                                   LALT, LOWER,   DEL,      SPC, RAISE,  LEAD \
                               //`--------------------'  `--------------------'
   ),
 
@@ -81,9 +86,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
         RST, XXXXX,  WBAK,  MS_U,  WFWD,  WH_U,                  C_LFT,  C_DN,  C_UP, C_RGT, XXXXX,  VOLU,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX, XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                   LEFT,  DOWN,    UP,  RGHT, XXXXX,  VOLD,\
+      XXXXX,  SCRP,  MS_L,  MS_D,  MS_R,  WH_D,                   LEFT,  DOWN,    UP,  RGHT, XXXXX,  VOLD,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   HOME,  PGDN,  PGUP,   END, XXXXX, XXXXX,\
+      XXXXX,  SCRN, XXXXX, XXXXX, XXXXX, XXXXX,                   HOME,  PGDN,  PGUP,   END, XXXXX, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                    BTN3,  BTN2,  BTN1,     MPLY,  MPRV,  MNXT \
                               //`--------------------'  `--------------------'
@@ -105,21 +110,10 @@ void matrix_init_user(void) {
 //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
 #ifdef SSD1306OLED
 
-// When add source files to SRC in rules.mk, you can use functions.
-// const char *read_layer_state(void);
-const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
-
+const char * read_logo(void);
 char matrix_line_str[24];
 
-const char *read_layer_state(void) {
+const char * read_layer_state(void) {
   uint8_t layer = biton32(layer_state);
 
   strcpy(matrix_line_str, "Layer: ");
@@ -168,6 +162,9 @@ void matrix_scan_user(void) {
         // Single key macros
         SEQ_ONE_KEY(KC_2) {
             SEND_STRING (" 2>&1");
+        }
+        SEQ_ONE_KEY(KC_F) {
+            SEND_STRING("find . -name ");
         }
         SEQ_ONE_KEY(KC_G) {
             SEND_STRING("grep -E ''"SS_TAP(X_LEFT));
@@ -306,34 +303,96 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_J, KC_B) {
             SEND_STRING ("https://jira.bats.com/browse/EUCPP-");
         }
+    }
+}
 
-        // SQL macros
-        SEQ_TWO_KEYS(KC_S, KC_S) {
-            SEND_STRING ("select * from ");
+bool is_hid_connected = false; // do we have a PC connection yet?
+int8_t screen_max_count = 0;   // number of info screens we can scroll through (set by connecting hid script)
+uint8_t screen_show_index = 0; // current index of the info screen we are displaying
+int screen_data_index = 0;     // current index into the screen_data_buffer that we should write to
+uint8_t screen_data_buffer[SERIAL_SCREEN_BUFFER_LENGTH - 1] =  {0}; // buffer used to store the screen data sent by connected hid script
+int recv_length = 0;
+int first_byte = 0;
+
+void raw_hid_send_screen_index(void) {
+    // Send the current info screen index to the connected info script so that it can pass back the new data
+    uint8_t send_data[32] = {0};
+    send_data[0] = screen_show_index + 1; // add one so that we can distinguish it from a null byte
+    raw_hid_send(send_data, sizeof(send_data));
+}
+
+void raw_hid_receive( uint8_t *data, uint8_t length ) {
+    // PC is now connected
+    is_hid_connected = true;
+
+    // Initial connections use '1' in the first byte to indicate this
+    if (length > 1 && data[0] == 1) {
+        screen_data_index = 0;
+
+        // The second byte is the number of info screens the connected hid script allows us to scroll through
+        screen_max_count = data[1];
+        if (screen_show_index >= screen_max_count) {
+            screen_show_index = 0;
         }
-        SEQ_TWO_KEYS(KC_S, KC_P) {
-            SEND_STRING ("select * from proc_param('');" SS_TAP(X_LEFT) SS_TAP(X_LEFT) SS_TAP(X_LEFT));
+
+        recv_length = 0;
+        first_byte = 0;
+
+        // Tell the connection which info screen we want to look at initially
+        raw_hid_send_screen_index();
+        return;
+    }
+
+    // Otherwise the data we receive is one line of the screen to show on the display
+    if (length >= 21) {
+        // Copy the data into our buffer and increment the number of lines we have got so far
+        memcpy((char*)&screen_data_buffer[screen_data_index * 21], data, 21);
+        screen_data_index++;
+
+        recv_length = length;
+        first_byte = data[0];
+
+        // Once we reach 4 lines, we have a full screen
+        if (screen_data_index == 4) {
+            // Reset the buffer back to receive the next full screen data
+            screen_data_index = 0;
+
+            // Now transfer the whole 4 lines to the slave side of the keyboard
+            memset((char*)&serial_slave_screen_buffer[0], ' ', sizeof(serial_slave_screen_buffer));
+            memcpy((char*)&serial_slave_screen_buffer[1], screen_data_buffer, sizeof(screen_data_buffer));
+            serial_slave_screen_buffer[0] = 1;
+            serial_slave_screen_buffer[sizeof(serial_slave_screen_buffer) - 1] = 0;
+            hid_screen_change = true;
         }
-        SEQ_TWO_KEYS(KC_S, KC_D) {
-            SEND_STRING ("select * from symbol_daily where effective_date=current_date and symbol_name='';" SS_TAP(X_LEFT) SS_TAP(X_LEFT));
-        }
-        SEQ_TWO_KEYS(KC_S, KC_R) {
-            SEND_STRING ("current_date between begin_dt and end_dt");
-        }
+    }
+}
+
+char hid_info_str[20];
+const char * read_hid(void) {
+    snprintf(hid_info_str, sizeof(hid_info_str), "Screen: %d/%d",
+             is_hid_connected ? screen_show_index+1 : 0,
+             is_hid_connected ? screen_max_count : 0);
+    return hid_info_str;
+}
+
+void write_slave_info_screen(struct CharacterMatrix *matrix) {
+    if (serial_slave_screen_buffer[0] > 0) {
+        // If the first byte of the buffer is non-zero we should have a full set of data to show
+        matrix_write(matrix, (char*)serial_slave_screen_buffer + 1);
+    } else {
+        // Otherwise we just draw the logo
+        matrix_write(matrix, read_logo());
     }
 }
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
   if (is_master) {
-    // If you want to change the display of OLED, you need to change here
     matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
-    //matrix_write_ln(matrix, read_keylogs());
-    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     matrix_write_ln(matrix, read_host_led_state());
-    //matrix_write_ln(matrix, read_timelog());
+    matrix_write(matrix, read_hid());
   } else {
-    matrix_write(matrix, read_logo());
+    // Show the logo or screen info on the slave side
+    write_slave_info_screen(matrix);
   }
 }
 
@@ -353,11 +412,31 @@ void iota_gfx_task_user(void) {
 #endif//SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
-#ifdef SSD1306OLED
-    set_keylog(keycode, record);
-#endif
-    // set_timelog();
-  }
-  return true;
+    switch (keycode) {
+    case KC_SCRN:
+        if (record->event.pressed) {
+            screen_show_index++;
+            if (screen_show_index >= screen_max_count) {
+                screen_show_index = 0;
+            }
+            if (is_hid_connected) {
+                raw_hid_send_screen_index();
+            }
+        }
+        break;
+    case KC_SCRP:
+        if (record->event.pressed) {
+            if (screen_show_index == 0) {
+                screen_show_index = screen_max_count - 1;
+            }
+            else {
+                screen_show_index--;
+            }
+            if (is_hid_connected) {
+                raw_hid_send_screen_index();
+            }
+        }
+        break;
+    }
+    return true;
 }
