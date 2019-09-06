@@ -3,7 +3,6 @@
 
 #include "../../config.h"
 
-#define _______  KC_TRNS
 #define KC______ KC_TRNS
 
 // One-shot modfiers
@@ -12,7 +11,6 @@
 #define KC_OGUI OSM(MOD_LGUI)
 #define KC_OHYP OSM(MOD_HYPR)
 #define KC_OMEH OSM(MOD_MEH)
-#define KC_CALT OSM(MOD_LCTL|MOD_LALT)
 
 // One-shot layers
 #define KC_NUM  OSL(_NUM)
@@ -34,6 +32,8 @@
 // Modifier key combos
 #define KC_CTAB  C(KC_TAB)
 #define KC_SCP   S(C(KC_P))
+#define KC_SPGUP S(KC_PGUP)
+#define KC_SCF10 S(C(KC_F10))
 
 // Get taps and holds working properly
 #undef  ONESHOT_TAP_TOGGLE
@@ -48,7 +48,6 @@
 #undef  TAPPING_TERM
 #define TAPPING_TERM 300
 #define PERMISSIVE_HOLD
-//#define RETRO_TAPPING
 
 #define LEADER_TIMEOUT 1000
 
