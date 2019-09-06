@@ -81,4 +81,7 @@
     { KC_##R06, KC_##R16, KC_##R26, KC_##R36, KC_##R46, KC_NO    }  \
     }
 
+#undef DEBOUNCE
+#define DEBOUNCE 15
+
 #endif
