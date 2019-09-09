@@ -33,7 +33,7 @@
 #define KC_CTAB  C(KC_TAB)
 #define KC_SCP   S(C(KC_P))
 #define KC_SPGUP S(KC_PGUP)
-#define KC_SCF10 S(C(KC_F10))
+#define KC_CURSB S(C(KC_DOWN))
 
 // Get taps and holds working properly
 #undef  ONESHOT_TAP_TOGGLE
