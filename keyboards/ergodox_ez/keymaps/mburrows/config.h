@@ -17,24 +17,22 @@
 #define KC_SYM  OSL(_SYM)
 
 // Modifier taps
+#define KC_CENT  CTL_T(KC_ENT)
+#define KC_CESC  CTL_T(KC_ESC)
 #define KC_G_ESC GUI_T(KC_ESC)
-
-#define KC_S_R   SFT_T(KC_R)
-#define KC_A_S   ALT_T(KC_S)
-#define KC_C_T   CTL_T(KC_T)
-#define KC_H_D   HYPR_T(KC_D)
-
-#define KC_S_I   SFT_T(KC_I)
-#define KC_A_E   ALT_T(KC_E)
-#define KC_C_N   CTL_T(KC_N)
-#define KC_H_H   HYPR_T(KC_H)
+#define KC_CHOME CTL_T(KC_HOME)
+#define KC_AEND  ALT_T(KC_END)
+#define KC_CPGUP CTL_T(KC_PGUP)
+#define KC_APGDN ALT_T(KC_PGDN)
 
 // Layer taps
 #define KC_N_A  LT(_NAV,KC_A)
 #define KC_N_O  LT(_NAV,KC_O)
 
 // Modifier key combos
-#define KC_XSEL  S(A(KC_RGHT))
+#define KC_CTAB  C(KC_TAB)
+#define KC_SCP   S(C(KC_P))
+#define KC_SPGUP S(KC_PGUP)
 #define KC_CURSB S(C(KC_DOWN))
 
 // Get taps and holds working properly

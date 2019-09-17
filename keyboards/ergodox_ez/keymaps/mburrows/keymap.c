@@ -30,22 +30,22 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_ergodox_pretty_kc(
 //  ,--------------------------------------------------.           ,--------------------------------------------------.
-       LEAD  ,   1  ,   2  ,   3  ,   4  ,   5  , LBRC ,             RBRC ,   6  ,   7  ,   8  ,   9  ,   0  ,  CURSB ,\
+       OHYP  ,   1  ,   2  ,   3  ,   4  ,   5  , LBRC ,             RBRC ,   6  ,   7  ,   8  ,   9  ,   0  ,  EQL   ,\
 //  |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-       ASTR  ,   Q  ,   W  ,   F  ,   P  ,   G  , LCBR ,             RCBR ,   J  ,   L  ,   U  ,   Y  , SCLN ,  EQL   ,\
+       BSLS  ,   Q  ,   W  ,   F  ,   P  ,   G  , LCBR ,             RCBR ,   J  ,   L  ,   U  ,   Y  , SCLN ,  QUOT  ,\
 //  |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
-       MINS  , N_A  , S_R  , A_S  , C_T  , H_D  ,                           H_H  , C_N  , A_E  , S_I  , N_O  ,  QUOT  ,\
+       CESC  , N_A  ,   R  ,   S  ,   T  ,   D  ,                             H  ,   N  ,   E  ,   I  , N_O  ,  CENT  ,\
 //  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
        LSPO  ,   Z  ,   X  ,   C  ,   V  ,   B  , DEL  ,             TAB  ,   K  ,   M  , COMM , DOT  , SLSH ,  RSPC  ,\
 //  `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-       AMPR  , PERC , CIRC , DLR  , TILD ,                                         HASH , EXLM ,  AT  , BSLS ,  PIPE,\
+       LEAD  , OCTL , OALT , OGUI ,  NUM ,                                          SYM , LEFT , DOWN ,  UP  ,  RGHT,\
 //    `----------------------------------'                                       `----------------------------------'
 //                                         ,-------------.       ,-------------.
-                                             XSEL , HOME ,         PGUP , F12  ,\
+                                             SCP  , CPPST,        CURSB , F12  ,\
 //                                  ,------|------|------|       |------+------+------.
-                                                    END  ,         PGDN ,             \
+                                                    CHOME,        CPGUP ,             \
 //                                  |      |      |------|       |------|      |      |
-                                      BSPC , G_ESC, NUM  ,         SYM  , ENT  , SPC  \
+                                      BSPC , G_ESC, AEND ,        APGDN , ENT  , SPC  \
 //                                  `--------------------'       `--------------------'
 ),
 
