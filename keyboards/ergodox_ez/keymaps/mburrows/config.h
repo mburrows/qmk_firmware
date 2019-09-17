@@ -32,7 +32,6 @@
 // Layer taps
 #define KC_N_A  LT(_NAV,KC_A)
 #define KC_N_O  LT(_NAV,KC_O)
-#define KC_GAME TG(_GAME)
 
 // Modifier key combos
 #define KC_XSEL  S(A(KC_RGHT))

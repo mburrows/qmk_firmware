@@ -7,7 +7,7 @@
 enum ergodox_layers {
   _COLEMAK = 0,
   _NUM,
-  _GAME,
+  _SYM,
   _NAV
 };
 
@@ -18,27 +18,21 @@ enum custom_keycodes {
 
 // Tap Dance Declarations
 enum {
-  TD_COPY_PASTE = 0,
-  TD_LBR,
-  TD_RBR
+  TD_COPY_PASTE = 0
 };
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_COPY_PASTE] = ACTION_TAP_DANCE_DOUBLE(LSFT(LCTL(KC_C)),LSFT(LCTL(KC_V))),
-  [TD_LBR]        = ACTION_TAP_DANCE_DOUBLE(KC_LCBR,KC_LBRC),
-  [TD_RBR]        = ACTION_TAP_DANCE_DOUBLE(KC_RCBR,KC_RBRC)
+  [TD_COPY_PASTE]  = ACTION_TAP_DANCE_DOUBLE(LSFT(LCTL(KC_C)),LSFT(LCTL(KC_V)))
 };
 #define KC_CPPST TD(TD_COPY_PASTE)
-#define KC_LBR   TD(TD_LBR)
-#define KC_RBR   TD(TD_RBR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_ergodox_pretty_kc(
 //  ,--------------------------------------------------.           ,--------------------------------------------------.
-       GRV   ,   1  ,   2  ,   3  ,   4  ,   5  , CAPS ,             GAME ,  6   ,   7  ,   8  ,   9  ,   0  ,  LEAD  ,\
+       LEAD  ,   1  ,   2  ,   3  ,   4  ,   5  , LBRC ,             RBRC ,   6  ,   7  ,   8  ,   9  ,   0  ,  CURSB ,\
 //  |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-       ASTR  ,   Q  ,   W  ,   F  ,   P  ,   G  , LBR  ,             RBR  ,   J  ,   L  ,   U  ,   Y  , SCLN ,  EQL   ,\
+       ASTR  ,   Q  ,   W  ,   F  ,   P  ,   G  , LCBR ,             RCBR ,   J  ,   L  ,   U  ,   Y  , SCLN ,  EQL   ,\
 //  |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
        MINS  , N_A  , S_R  , A_S  , C_T  , H_D  ,                           H_H  , C_N  , A_E  , S_I  , N_O  ,  QUOT  ,\
 //  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -51,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                  ,------|------|------|       |------+------+------.
                                                     END  ,         PGDN ,             \
 //                                  |      |      |------|       |------|      |      |
-                                      BSPC , G_ESC, NUM  ,         CURSB, ENT  , SPC  \
+                                      BSPC , G_ESC, NUM  ,         SYM  , ENT  , SPC  \
 //                                  `--------------------'       `--------------------'
 ),
 
@@ -76,24 +70,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                 `--------------------'       `--------------------'
 ),
 
-[_GAME] = LAYOUT_ergodox_pretty_kc(
+[_SYM] = LAYOUT_ergodox_pretty_kc(
 // ,---------------------------------------------------.           ,--------------------------------------------------.
-        ESC  ,   1  ,   2  ,   3  ,   4  ,   5  ,   6  ,             _____,   6  ,   7  ,   8  ,   9  ,   0  , BSPC   ,\
+        _____,  F1  ,  F2  ,  F3  ,  F4  ,  F5  , _____,             _____,  F6  ,  F7  ,  F8  ,  F9  , F10  ,  F11   ,\
 // |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
-        TAB  ,   Q  ,   W  ,   E  ,   R  ,   T  , LBRC ,             _____,   Y  ,   U  ,   I  ,   O  ,   P  , QUOT   ,\
+        _____, EXLM ,  AT  , LCBR , RCBR , PIPE , _____,             _____, _____, GRV  , ASTR , _____, _____,  F12   ,\
 // |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-       LCTL  ,   A  ,   S  ,   D  ,   F  ,   G  ,                             H  ,   J  ,   K  ,   L  , SCLN , ENT    ,\
+        _____, HASH , DLR  , LPRN , RPRN , AMPR ,                            INS , MINS , EQL  , _____, _____, _____  ,\
 // |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
-       LSFT  ,   Z  ,   X  ,   C  ,   V  ,   B  , RBRC ,             _____,   N  ,   M  , COMM ,  DOT , SLSH , RSFT   ,\
+        _____, PERC , CIRC , LBRC , RBRC , TILD , _____,             _____, CAPS , UNDS , PLUS , _____, _____, _____  ,\
 // `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
-        GRV  ,  F1  ,  F2  ,  F3  ,  F4  ,                                          F7  ,  F8  ,  F9  ,  F10 , F11  ,\
+        _____, _____, _____, _____, _____,                                         _____, _____, _____, _____, _____,\
 //   `-----------------------------------'                                       `----------------------------------'
 //                                        ,-------------.       ,-------------.
-                                             F5  , HOME ,         PGUP ,  F6  ,\
+                                            _____, _____,         _____, _____,\
 //                                 ,------|------|------|       |------+------+------.
-                                                   END  ,         PGDN ,             \
+                                                   _____,         _____,             \
 //                                 |      |      |------|       |------|      |      |
-                                     SPC  , LALT , BSPC ,         BSPC ,  ENT ,  SPC \
+                                     _____, _____, _____,         _____, _____, _____\
 //                                 `--------------------'       `--------------------'
 ),
 
@@ -110,11 +104,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _____, _____, _____, _____, _____,                                         _____, _____, _____, _____, _____,\
 //   `-----------------------------------'                                       `----------------------------------'
 //                                        ,-------------.       ,-------------.
-                                            BTN3 , WH_U ,         VOLU , MPRV ,\
+                                            BTN3 , _____,         MUTE , MPRV ,\
 //                                 ,------|------|------|       |------+------+------.
-                                                   WH_D ,         VOLD ,             \
+                                                   WH_U ,         VOLU ,             \
 //                                 |      |      |------|       |------| MPLY | MNXT |
-                                     BTN1 , BTN2 , _____,         MUTE , _____, _____\
+                                     BTN1 , BTN2 , WH_D ,         VOLD , _____, _____\
 //                                 `--------------------'       `--------------------'
 )
 
