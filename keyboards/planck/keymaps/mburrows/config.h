@@ -16,6 +16,14 @@
 #define CTL_ESC MT(MOD_LCTL,KC_ESC)
 #define CTL_ENT MT(MOD_LCTL,KC_ENT)
 #define HYP_TAB HYPR_T(KC_TAB)
+#define S_R   SFT_T(KC_R)
+#define S_I   SFT_T(KC_I)
+#define A_S   ALT_T(KC_S)
+#define A_E   ALT_T(KC_E)
+#define C_T   CTL_T(KC_T)
+#define C_N   CTL_T(KC_N)
+#define H_D   HYPR_T(KC_D)
+#define H_H   HYPR_T(KC_H)
 
 // Layer taps
 #define NAV_A    LT(_NAV,KC_A)

@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  |  '   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | ESC  |A(NAV)|   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |O(NAV)|Enter |
+ * | ESC  |A(NAV)| S_R  | A_S  | C_T  | H_D  | H_H  | C_N  | A_E  | S_I  |O(NAV)|Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |Shift(|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Shift)|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_COLEMAK] = {
   {HYP_TAB, KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
-  {CTL_ESC, NAV_A,   KC_R,    KC_S,    KC_T,     KC_D,     KC_H,    KC_N,    KC_E,    KC_I,    NAV_O,   CTL_ENT  },
+  {CTL_ESC, NAV_A,   S_R,     A_S,     C_T,      H_D,      H_H,     C_N,     A_E,     S_I,     NAV_O,   CTL_ENT  },
   {KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,     KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC  },
   {KC_LEAD, OSM_CTL, OSM_ALT, OSM_GUI, LWR_BSPC, KC_BSPC,  KC_SPC,  RSE_SPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  }
 },
