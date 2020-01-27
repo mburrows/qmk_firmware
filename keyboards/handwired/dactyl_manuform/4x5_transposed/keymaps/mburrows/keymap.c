@@ -7,56 +7,24 @@ extern keymap_config_t keymap_config;
 #define _RAISE 2
 #define _NAV 3
 
-// Fillers to make layering more clear
-
-#define ____ KC_TRNS
-
-#define RAISE MO(_RAISE)
-#define LOWER MO(_LOWER)
-
-#define KC______ KC_TRNS
-#define KC_XXXXX KC_NO
-#define KC_LOWER LT(_LOWER, KC_LBRC)
-#define KC_RAISE LT(_RAISE, KC_RBRC)
-#define KC_NAV_A LT(_NAV,KC_A)
-#define KC_NAV_O LT(_NAV,KC_O)
-#define KC_S_ESC SFT_T(KC_ESC)
-#define KC_G_BSP LGUI_T(KC_BSPC)
-#define KC_S_ENT SFT_T(KC_ENT)
-#define KC_C_SPC CTL_T(KC_SPC)
-#define KC_H_TAB HYPR_T(KC_TAB)
-#define KC_H_DEL HYPR_T(KC_DEL)
-#define KC_C_PGU CTL_T(KC_PGUP)
-#define KC_A_PGD ALT_T(KC_PGDN)
-#define KC_C_HME CTL_T(KC_HOME)
-#define KC_A_END ALT_T(KC_END)
-#define KC_TMUX  LCTL(KC_SPACE)
-#define KC_C_ALT OSM(MOD_LCTL | MOD_LALT)
-#define KC_HYP   OSM(MOD_HYPR)
-#define KC_RST   RESET
-#define KC_C_LFT C(KC_LEFT)
-#define KC_C_DN  C(KC_DOWN)
-#define KC_C_UP  C(KC_UP)
-#define KC_C_RGT C(KC_RIGHT)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_kc( \
  //,----------------------------------,                             ,----------------------------------,
          Q,     W,     F,     P,     G,                                   J,     L,     U,     Y,  SCLN,\
  //|------+------+------+------+------|                             |------+------+------+------+------|
-     NAV_A,     R,     S,     T,     D,                                   H,     N,     E,     I, NAV_O,\
+       N_A,   S_R,   A_S,   C_T,   H_D,                                 H_H,   C_N,   A_E,   S_I,   N_O,\
  //|------+------+------+------+------|                             |------+------+------+------+------|
-         Z,     X,     C,     V,     B,                                   K,     M,  COMM,   DOT,  SLSH,\
+       S_Z,     X,     C,     V,     B,                                   K,     M,  COMM,   DOT, S_SLS,\
  //|------+------+------+------+------,                             ,------+------+------+------+------,
-            C_ALT,   HYP,                                                            TMUX,  LEAD,\
+             LEAD,   F13,                                                             F12,C_RBRC,\
         //'------+------+-------------'                             '-------------+------+------'
-                          S_ESC, G_BSP,                               C_SPC, S_ENT,\
+                          LOWER,  BSPC,                                 SPC, RAISE,\
                       //'------+------'                             '------+------'
                                     //'------+------' '------+------'
-                                        LOWER, C_HME,   C_PGU, RAISE,\
+                                        G_ESC,  HOME,    PGUP,   ENT,\
                                     //'------+------' '------+------'
-                                        H_DEL, A_END,   A_PGD, H_TAB \
+                                          DEL,   END,    PGDN,   TAB \
                                     //'------+------' '------+------'
 ),
 
@@ -104,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|------+------+------+------+------|                             |------+------+------+------+------|
      XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                                LEFT,  DOWN,    UP,  RGHT, XXXXX,\
  //|------+------+------+------+------|                             |------+------+------+------+------|
-     XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                                HOME,  PGDN,  PGUP,   END, XXXXX,\
+     XXXXX,  BTN1,  BTN3,  BTN2, XXXXX,                                HOME,  PGDN,  PGUP,   END, XXXXX,\
  //|------+------+------+------+------,                             ,------+------+------+------+------,
             _____, _____,                                                            BRID,  BRIU,\
         //'------+------'-------------'                             '-------------'------+------'
@@ -131,7 +99,7 @@ void matrix_scan_user(void) {
         leader_end();
 
         // Single key macros
-        SEQ_ONE_KEY(KC_2) {
+        SEQ_ONE_KEY(KC_W) {
             SEND_STRING (" 2>&1");
         }
         SEQ_ONE_KEY(KC_F) {
@@ -219,14 +187,14 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_D) {
             SEND_STRING("git diff -w");
         }
-        SEQ_TWO_KEYS(KC_G, KC_1) {
+        SEQ_TWO_KEYS(KC_G, KC_Q) {
             SEND_STRING("git log --oneline");
         }
         SEQ_TWO_KEYS(KC_G, KC_B) {
             SEND_STRING("git branch ");
         }
         SEQ_TWO_KEYS(KC_G, KC_V) {
-            SEND_STRING("git svnup");
+            SEND_STRING("git svn");
         }
         SEQ_TWO_KEYS(KC_G, KC_G) {
             SEND_STRING("git grep -n --break ''"SS_TAP(X_LEFT));
