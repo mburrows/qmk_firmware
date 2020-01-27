@@ -22,9 +22,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           LOWER,  BSPC,                                 SPC, RAISE,\
                       //'------+------'                             '------+------'
                                     //'------+------' '------+------'
-                                        G_ESC,  HOME,    PGUP,   ENT,\
+                                        G_ESC,   DEL,     TAB,   ENT,\
                                     //'------+------' '------+------'
-                                          DEL,   END,    PGDN,   TAB \
+                                         HOME,   END,    PGDN,  PGUP \
                                     //'------+------' '------+------'
 ),
 
