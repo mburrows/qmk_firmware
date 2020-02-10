@@ -35,8 +35,7 @@
 #define KC_N_O  LT(_NAV,KC_O)
 
 // Modifier key combos
-#define KC_SCP   S(C(KC_P))
-#define KC_CURSB S(C(KC_DOWN))
+#define KC_JTAG C(KC_RBRC)
 
 // Get taps and holds working properly
 #undef  ONESHOT_TAP_TOGGLE
@@ -50,7 +49,9 @@
 
 #undef  TAPPING_TERM
 #define TAPPING_TERM 300
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
+// #define TAPPING_FORCE_HOLD
 
 #define LEADER_TIMEOUT 1000
 

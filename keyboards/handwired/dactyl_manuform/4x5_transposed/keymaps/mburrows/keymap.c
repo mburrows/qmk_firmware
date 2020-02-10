@@ -108,6 +108,9 @@ void matrix_scan_user(void) {
         SEQ_ONE_KEY(KC_G) {
             SEND_STRING("grep -E ''"SS_TAP(X_LEFT));
         }
+        SEQ_ONE_KEY(KC_I) {
+          SEND_STRING(" \\_inline.h");
+        }
         SEQ_ONE_KEY(KC_M) {
             SEND_STRING("mburrows");
         }
