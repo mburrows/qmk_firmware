@@ -25,20 +25,16 @@ enum {
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_COPY_PASTE] = ACTION_TAP_DANCE_DOUBLE(LSFT(LCTL(KC_C)),LSFT(LCTL(KC_V))),
-  [TD_LBR]        = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_LBRC),
-  [TD_RBR]        = ACTION_TAP_DANCE_DOUBLE(KC_RCBR, KC_RBRC)
+  [TD_COPY_PASTE] = ACTION_TAP_DANCE_DOUBLE(LSFT(LCTL(KC_C)),LSFT(LCTL(KC_V)))
 };
 #define KC_CPPST TD(TD_COPY_PASTE)
-#define KC_LBR TD(TD_LBR)
-#define KC_RBR TD(TD_RBR)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_ergodox_pretty_kc(
 //  ,--------------------------------------------------.           ,--------------------------------------------------.
        HGRV  ,   1  ,   2  ,   3  ,   4  ,   5  , LBRC ,             RBRC ,   6  ,   7  ,   8  ,   9  ,   0  ,  EQL   ,\
 //  |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
-       BSLS  ,   Q  ,   W  ,   F  ,   P  ,   G  , LBR  ,             RBR  ,   J  ,   L  ,   U  ,   Y  , SCLN ,  MINS  ,\
+       BSLS  ,   Q  ,   W  ,   F  ,   P  ,   G  , LCBR ,             RCBR ,   J  ,   L  ,   U  ,   Y  , SCLN ,  MINS  ,\
 //  |--------+------+------+------+------+------|------|           |------|------+------+------+------+------+--------|
        CESC  , N_A  , S_R  , A_S  , C_T  , H_D  ,                           H_H  , C_N  , A_E  , S_I  , N_O  ,  CQUOT ,\
 //  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
