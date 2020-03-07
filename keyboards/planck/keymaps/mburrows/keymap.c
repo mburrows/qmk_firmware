@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   F  |   P  |   G  |   J  |   L  |   U  |   Y  |   ;  |  '   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * | ESC  |A(NAV)|   R  |   S  |   T  |   D  |   H  |   N  |   E  |   I  |O(NAV)|Enter |
+ * | ESC  | N_A  | S_R  | A_S  | C_T  | H_D  | H_H  | C_N  | A_E  | S_I  | N_O  |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |Shift(|   Z  |   X  |   C  |   V  |   B  |   K  |   M  |   ,  |   .  |   /  |Shift)|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -30,27 +30,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_COLEMAK] = {
   {HYP_TAB, KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
-  {CTL_ESC, NAV_A,   KC_R,    KC_S,    KC_T,     KC_D,     KC_H,    KC_N,    KC_E,    KC_I,    NAV_O,   CTL_ENT  },
+  {CTL_ESC, NAV_A,    S_R,     A_S,     C_T,      H_D,      H_H,     C_N,     A_E,     S_I,    NAV_O,   CTL_ENT  },
   {KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,     KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC  },
   {KC_LEAD, OSM_CTL, OSM_ALT, OSM_GUI, LWR_BSPC, KC_BSPC,  KC_SPC,  RSE_SPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  }
 },
 
 /* Lower
  * ,-----------------------------------------------------------------------------------.
- * |      |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |   *  |
+ * |      |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |   .  |   4  |   5  |   6  |   -  |   =  |
+ * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |   +  |   4  |   5  |   6  |   *  |   =  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  F12 |  F6  |  F7  |  F8  |  F9  | F10  |   0  |   1  |   2  |   3  |   /  |   +  |
+ * |  F12 |  F6  |  F7  |  F8  |  F9  | F10  |   -  |   1  |   2  |   3  |   /  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |   0  |   .  |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_ASTR },
-  {KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_DOT,  KC_4,    KC_5,    KC_6,    KC_MINS, KC_EQL  },
-  {KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH, KC_PLUS },
-  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ }
+  {_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______ },
+  {KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_PLUS, KC_4,    KC_5,    KC_6,    KC_ASTR, KC_EQL  },
+  {KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_MINS, KC_1,    KC_2,    KC_3,    KC_SLSH, _______ },
+  {_______, _______, _______, _______, _______, _______, _______, _______, KC_0,  KC_DOT,    _______, _______ }
 },
 
 /* Raise
@@ -251,10 +251,10 @@ void matrix_scan_user(void) {
       SEND_STRING("{issue:EUCPP-}"SS_TAP(X_LEFT));
     }
     SEQ_TWO_KEYS(KC_J, KC_N) {
-      SEND_STRING ("{noformat}\n\n{noformat}"SS_TAP(X_UP));
+      SEND_STRING ("{noformat}");
     }
     SEQ_TWO_KEYS(KC_J, KC_C) {
-      SEND_STRING ("{code:sql}\n\n{code}"SS_TAP(X_UP));
+      SEND_STRING ("{code}");
     }
     SEQ_TWO_KEYS(KC_J, KC_B) {
       SEND_STRING ("https://jira.bats.com/browse/EUCPP-");

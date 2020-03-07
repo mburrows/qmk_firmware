@@ -30,7 +30,6 @@
 #define NAV_O    LT(_NAV,KC_O)
 #define LWR_BSPC LT(_LOWER,KC_BSPC)
 #define RSE_SPC  LT(_RAISE,KC_SPC)
-#define RSE_Z    LT(_RAISE,KC_Z)
 
 // Get taps and holds working properly
 #undef  ONESHOT_TAP_TOGGLE
@@ -43,8 +42,8 @@
 #define TAPPING_TOGGLE 2
 
 #undef  TAPPING_TERM
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
+#define TAPPING_TERM 300
+#define IGNORE_MOD_TAP_INTERRUPT
 
 #define LEADER_TIMEOUT 1000
 
