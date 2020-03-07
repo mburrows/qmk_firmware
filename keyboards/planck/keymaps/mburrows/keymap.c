@@ -29,10 +29,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_COLEMAK] = {
-  {HYP_TAB, KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
-  {CTL_ESC, NAV_A,    S_R,     A_S,     C_T,      H_D,      H_H,     C_N,     A_E,     S_I,    NAV_O,   CTL_ENT  },
-  {KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,     KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC  },
-  {KC_LEAD, OSM_CTL, OSM_ALT, OSM_GUI, LWR_BSPC, KC_BSPC,  KC_SPC,  RSE_SPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  }
+  { HYP_TAB, KC_Q,    KC_W,    KC_F,    KC_P,     KC_G,     KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_QUOT  },
+  { CTL_ESC, NAV_A,   S_R,     A_S,     C_T,      H_D,      H_H,     C_N,     A_E,     S_I,     NAV_O,   CTL_ENT  },
+  { KC_LSPO, KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,     KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC  },
+  { KC_LEAD, OSM_CTL, OSM_ALT, OSM_GUI, LWR_BSPC, KC_BSPC,  KC_SPC,  RSE_SPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  }
 },
 
 /* Lower
@@ -47,10 +47,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {_______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______ },
-  {KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_PLUS, KC_4,    KC_5,    KC_6,    KC_ASTR, KC_EQL  },
-  {KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_MINS, KC_1,    KC_2,    KC_3,    KC_SLSH, _______ },
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_0,  KC_DOT,    _______, _______ }
+  { _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______ },
+  { KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_PLUS, KC_4,    KC_5,    KC_6,    KC_ASTR, KC_EQL  },
+  { KC_F12,  KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_MINS, KC_1,    KC_2,    KC_3,    KC_SLSH, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, KC_0,    KC_DOT,  _______, _______ }
 },
 
 /* Raise
@@ -65,10 +65,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
-  {KC_GRV,  KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, _______, _______, KC_ASTR, _______, _______, _______ },
-  {KC_BSLS, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_AMPR, KC_INS,  KC_MINS, KC_EQL,  KC_DQUO, KC_QUOT, _______ },
-  {_______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, KC_CAPS, KC_UNDS, KC_PLUS, _______, _______, _______ },
-  {_______, _______, _______, _______, _______, KC_DEL, _______,  _______, _______, _______, _______, _______ }
+  { KC_GRV,  KC_EXLM, KC_AT,   KC_LCBR, KC_RCBR, KC_PIPE, _______, _______, KC_ASTR, _______, _______, _______ },
+  { KC_BSLS, KC_HASH, KC_DLR,  KC_LPRN, KC_RPRN, KC_AMPR, KC_INS,  KC_MINS, KC_EQL,  KC_DQUO, KC_QUOT, _______ },
+  { _______, KC_PERC, KC_CIRC, KC_LBRC, KC_RBRC, KC_TILD, KC_CAPS, KC_UNDS, KC_PLUS, _______, _______, _______ },
+  { _______, _______, _______, _______, _______, KC_DEL, _______,  _______, _______, _______, _______, _______ }
 },
 
 /* Navigation
@@ -83,10 +83,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NAV] = {
-  {RESET,   _______, KC_WBAK, KC_MS_U, KC_WFWD, KC_WH_U, _______, _______, _______, _______, _______, _______ },
-  {_______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______ },
-  {_______, _______, KC_BTN1, KC_BTN3, KC_BTN2, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______ },
-  {_______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY }
+  { RESET,   _______, KC_WBAK, KC_MS_U, KC_WFWD, KC_WH_U, _______, _______, _______, _______, _______, _______ },
+  { _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______, _______ },
+  { _______, _______, KC_BTN1, KC_BTN3, KC_BTN2, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______, _______ },
+  { _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY }
 },
 
 };
