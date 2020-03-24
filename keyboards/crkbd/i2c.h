@@ -19,11 +19,11 @@
 
 extern volatile uint8_t i2c_slave_buffer[SLAVE_BUFFER_SIZE];
 
-void i2c_master_init(void);
 uint8_t i2c_master_start(uint8_t address);
-void i2c_master_stop(void);
 uint8_t i2c_master_write(uint8_t data);
 uint8_t i2c_master_read(int);
+void i2c_master_init(void);
+void i2c_master_stop(void);
 void i2c_reset_state(void);
 void i2c_slave_init(uint8_t address);
 
