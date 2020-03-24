@@ -43,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        LEAD  , OCTL , OALT , OGUI ,  NUM ,                                          SYM , LEFT , DOWN ,  UP  ,  RGHT,\
 //    `----------------------------------'                                       `----------------------------------'
 //                                         ,-------------.       ,-------------.
-                                              JTAG, CPPST,           F13, F12  ,\
+                                              JTAG, CPPST,         F13  , F12  ,\
 //                                  ,------|------|------|       |------+------+------.
                                                     HOME ,         PGUP ,             \
 //                                  |      |      |------|       |------|      |      |

@@ -21,31 +21,12 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-#define KC______ KC_TRNS
-#define KC_XXXXX KC_NO
-#define KC_LOWER LT(_LOWER, KC_LBRC)
-#define KC_RAISE LT(_RAISE, KC_RBRC)
-#define KC_RST   RESET
-#define KC_H_TAB HYPR_T(KC_TAB)
-#define KC_G_BSP LGUI_T(KC_BSPC)
-#define KC_CA_BS LCA_T(KC_BSPC)
-#define KC_NAV_A LT(_NAV,KC_A)
-#define KC_NAV_O LT(_NAV,KC_O)
-#define KC_L_ESC LT(_LOWER,KC_ESC)
-#define KC_R_ENT LT(_RAISE,KC_ENT)
-#define KC_C_ESC CTL_T(KC_ESC)
-#define KC_C_ENT CTL_T(KC_ENT)
-#define KC_C_LFT C(KC_LEFT)
-#define KC_C_DN  C(KC_DOWN)
-#define KC_C_UP  C(KC_UP)
-#define KC_C_RGT C(KC_RIGHT)
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_kc( \
   //,-----------------------------------------.                ,-----------------------------------------.
-      H_TAB,     Q,     W,     F,     P,     G,                      J,     L,     U,     Y,  SCLN,  QUOT,\
+        TAB,     Q,     W,     F,     P,     G,                      J,     L,     U,     Y,  SCLN,  QUOT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      C_ESC, NAV_A,     R,     S,     T,     D,                      H,     N,     E,     I, NAV_O, C_ENT,\
+      C_ESC, NAV_A,   S_R,   A_S,   C_T,   H_D,                    H_H,   C_N,   A_E,   S_I, NAV_O, C_ENT,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
        LSPO,     Z,     X,     C,     V,     B,                      K,     M,  COMM,   DOT,  SLSH,  RSPC,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
@@ -57,11 +38,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------.                ,-----------------------------------------.
       XXXXX,     1,     2,     3,     4,     5,                      6,     7,     8,     9,     0,  ASTR,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-        F11,    F1,    F2,    F3,    F4,    F5,                    DOT,     4,     5,     6,  MINS,   EQL,\
+        F11,    F1,    F2,    F3,    F4,    F5,                   PLUS,     4,     5,     6,  ASTR,   EQL,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-        F12,    F6,    F7,    F8,    F9,   F10,                      0,     1,     2,     3,  SLSH,  PLUS,\
+        F12,    F6,    F7,    F8,    F9,   F10,                   MINS,     1,     2,     3,  SLSH, _____,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  _____, _____, _____,    _____, _____, _____ \
+                                  _____, _____, _____,        0,   DOT,   DOT \
                               //`--------------------'  `--------------------'
   ),
 
@@ -96,26 +77,19 @@ void persistent_default_layer_set(uint16_t default_layer) {
 }
 
 void matrix_init_user(void) {
-    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
+    // SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
     #ifdef SSD1306OLED
         iota_gfx_init(!has_usb());   // turns on the display
     #endif
 }
 
-//SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
+// SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
 #ifdef SSD1306OLED
 
-// When add source files to SRC in rules.mk, you can use functions.
-// const char *read_layer_state(void);
 const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
 const char *read_keylog(void);
 const char *read_keylogs(void);
-
-// const char *read_mode_icon(bool swap);
-// const char *read_host_led_state(void);
-// void set_timelog(void);
-// const char *read_timelog(void);
+void set_keylog(uint16_t keycode, keyrecord_t *record);
 
 char matrix_line_str[24];
 
@@ -166,7 +140,7 @@ void matrix_scan_user(void) {
         leader_end();
 
         // Single key macros
-        SEQ_ONE_KEY(KC_2) {
+        SEQ_ONE_KEY(KC_W) {
             SEND_STRING (" 2>&1");
         }
         SEQ_ONE_KEY(KC_G) {
@@ -325,14 +299,11 @@ void matrix_scan_user(void) {
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
   if (is_master) {
-    // If you want to change the display of OLED, you need to change here
     matrix_write_ln(matrix, read_layer_state());
     matrix_write_ln(matrix, read_keylog());
-    //matrix_write_ln(matrix, read_keylogs());
-    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     matrix_write_ln(matrix, read_host_led_state());
-    //matrix_write_ln(matrix, read_timelog());
-  } else {
+  }
+  else {
     matrix_write(matrix, read_logo());
   }
 }
@@ -350,14 +321,13 @@ void iota_gfx_task_user(void) {
   matrix_render_user(&matrix);
   matrix_update(&display, &matrix);
 }
-#endif//SSD1306OLED
+#endif // SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef SSD1306OLED
     set_keylog(keycode, record);
 #endif
-    // set_timelog();
   }
   return true;
 }
