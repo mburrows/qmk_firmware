@@ -41,8 +41,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define KC_NAV_O LT(_NAV, KC_O)
 
 // Modifier taps
-#define KC_C_ESC CTL_T(KC_ESC)
-#define KC_C_ENT CTL_T(KC_ENT)
 #define KC_S_R   SFT_T(KC_R)
 #define KC_S_I   SFT_T(KC_I)
 #define KC_A_S   ALT_T(KC_S)
