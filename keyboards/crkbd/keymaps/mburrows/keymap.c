@@ -1,11 +1,11 @@
 #include QMK_KEYBOARD_H
 #include "bootloader.h"
 #ifdef PROTOCOL_LUFA
-  #include "lufa.h"
-  #include "split_util.h"
+#include "lufa.h"
+#include "split_util.h"
 #endif
 #ifdef SSD1306OLED
-  #include "ssd1306.h"
+#include "ssd1306.h"
 #endif
 
 extern keymap_config_t keymap_config;
@@ -18,7 +18,7 @@ extern uint8_t is_master;
 #define _NAV 3
 
 enum macro_keycodes {
-  KC_SAMPLEMACRO,
+    KC_SAMPLEMACRO,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
       XXXXX, XXXXX,  MS_L,  MS_D,  MS_R,  WH_D,                   LEFT,  DOWN,    UP,  RGHT, XXXXX,  VOLD,\
   //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-      XXXXX, XXXXX,  BTN1,  BTN2,  BTN3, XXXXX,                   HOME,  PGDN,  PGUP,   END, XXXXX, XXXXX,\
+      XXXXX, XXXXX,  BTN1,  BTN3,  BTN2, XXXXX,                   HOME,  PGDN,  PGUP,   END, XXXXX, XXXXX,\
   //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
                                    BTN3,  BTN2,  BTN1,     MPLY,  MPRV,  MNXT \
                               //`--------------------'  `--------------------'
@@ -72,15 +72,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void persistent_default_layer_set(uint16_t default_layer) {
-  eeconfig_update_default_layer(default_layer);
-  default_layer_set(default_layer);
+    eeconfig_update_default_layer(default_layer);
+    default_layer_set(default_layer);
 }
 
 void matrix_init_user(void) {
     // SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-    #ifdef SSD1306OLED
-        iota_gfx_init(!has_usb());   // turns on the display
-    #endif
+#ifdef SSD1306OLED
+    iota_gfx_init(!has_usb());   // turns on the display
+#endif
 }
 
 // SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
@@ -94,40 +94,39 @@ void set_keylog(uint16_t keycode, keyrecord_t *record);
 char matrix_line_str[24];
 
 const char *read_layer_state(void) {
-  uint8_t layer = biton32(layer_state);
+    uint8_t layer = biton32(layer_state);
 
-  strcpy(matrix_line_str, "Layer: ");
+    strcpy(matrix_line_str, "Layer: ");
 
-  switch (layer)
-  {
+    switch (layer)
+    {
     case _COLEMAK:
-      strcat(matrix_line_str, "Default");
-      break;
+        strcat(matrix_line_str, "Default");
+        break;
     case _LOWER:
-      strcat(matrix_line_str, "Lower");
-      break;
+        strcat(matrix_line_str, "Lower");
+        break;
     case _RAISE:
-      strcat(matrix_line_str, "Raise");
-      break;
+        strcat(matrix_line_str, "Raise");
+        break;
     case _NAV:
-      strcat(matrix_line_str, "Navigation");
-      break;
+        strcat(matrix_line_str, "Navigation");
+        break;
     default:
-      sprintf(matrix_line_str + strlen(matrix_line_str), "Unknown (%d)", layer);
-  }
+        sprintf(matrix_line_str + strlen(matrix_line_str), "Unknown (%d)", layer);
+    }
 
-  return matrix_line_str;
+    return matrix_line_str;
 }
 
 char host_led_state_str[24];
 
 const char *read_host_led_state(void)
 {
-  uint8_t leds = host_keyboard_leds();
-  snprintf(host_led_state_str, sizeof(host_led_state_str), "CapsLock:%s",
-           (leds & (1 << USB_LED_CAPS_LOCK)) ? "on" : "- ");
+    uint8_t leds = host_keyboard_leds();
+    snprintf(host_led_state_str, sizeof(host_led_state_str), "CapsLock:%s", (leds & (1 << USB_LED_CAPS_LOCK)) ? "on" : "- ");
 
-  return host_led_state_str;
+    return host_led_state_str;
 }
 
 LEADER_EXTERNS();
@@ -231,9 +230,6 @@ void matrix_scan_user(void) {
         SEQ_TWO_KEYS(KC_G, KC_B) {
             SEND_STRING("git branch ");
         }
-        SEQ_TWO_KEYS(KC_G, KC_V) {
-            SEND_STRING("git svnup");
-        }
         SEQ_TWO_KEYS(KC_G, KC_G) {
             SEND_STRING("git grep -n --break ''"SS_TAP(X_LEFT));
         }
@@ -251,6 +247,9 @@ void matrix_scan_user(void) {
         }
         SEQ_TWO_KEYS(KC_G, KC_Y) {
             SEND_STRING("git commit --amend -C HEAD ");
+        }
+        SEQ_TWO_KEYS(KC_G, KC_Z) {
+            SEND_STRING("git stash");
         }
 
         // Wire macros
@@ -298,36 +297,36 @@ void matrix_scan_user(void) {
 }
 
 void matrix_render_user(struct CharacterMatrix *matrix) {
-  if (is_master) {
-    matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
-    matrix_write_ln(matrix, read_host_led_state());
-  }
-  else {
-    matrix_write(matrix, read_logo());
-  }
+    if (is_master) {
+        matrix_write_ln(matrix, read_layer_state());
+        matrix_write_ln(matrix, read_keylog());
+        matrix_write_ln(matrix, read_host_led_state());
+    }
+    else {
+        matrix_write(matrix, read_logo());
+    }
 }
 
 void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
-  if (memcmp(dest->display, source->display, sizeof(dest->display))) {
-    memcpy(dest->display, source->display, sizeof(dest->display));
-    dest->dirty = true;
-  }
+    if (memcmp(dest->display, source->display, sizeof(dest->display))) {
+        memcpy(dest->display, source->display, sizeof(dest->display));
+        dest->dirty = true;
+    }
 }
 
 void iota_gfx_task_user(void) {
-  struct CharacterMatrix matrix;
-  matrix_clear(&matrix);
-  matrix_render_user(&matrix);
-  matrix_update(&display, &matrix);
+    struct CharacterMatrix matrix;
+    matrix_clear(&matrix);
+    matrix_render_user(&matrix);
+    matrix_update(&display, &matrix);
 }
 #endif // SSD1306OLED
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
+    if (record->event.pressed) {
 #ifdef SSD1306OLED
-    set_keylog(keycode, record);
+        set_keylog(keycode, record);
 #endif
-  }
-  return true;
+    }
+    return true;
 }
