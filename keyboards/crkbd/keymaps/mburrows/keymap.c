@@ -98,8 +98,7 @@ const char *read_layer_state(void) {
 
     strcpy(matrix_line_str, "Layer: ");
 
-    switch (layer)
-    {
+    switch (layer) {
     case _COLEMAK:
         strcat(matrix_line_str, "Default");
         break;
@@ -125,7 +124,6 @@ const char *read_host_led_state(void)
 {
     uint8_t leds = host_keyboard_leds();
     snprintf(host_led_state_str, sizeof(host_led_state_str), "CapsLock:%s", (leds & (1 << USB_LED_CAPS_LOCK)) ? "on" : "- ");
-
     return host_led_state_str;
 }
 
